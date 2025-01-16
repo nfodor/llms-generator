@@ -8,7 +8,7 @@
 ## Why Use `llms-generator`?
 
 ### The Goal
-The primary goal of this library is to make your API documentation **readable, structured, and AI-ready**. By generating standardized files like `llms.txt`, you ensure that your APIs are easily indexed by LLMs, allowing developers and tools to interact with them effectively.
+The primary goal of this library is to make your API documentation **readable, structured, and AI-ready**. By generating standardized files like `llms.txt`, you ensure that your APIs are easily indexed by LLMs, allowing developers and tools to interact with them effectively and automatically.
 
 ### Why It's Important
 - **Enhance Developer Experience**: By enabling LLMs to provide accurate, real-time responses about your APIs, you make it easier for developers to integrate with your services.
