@@ -45,8 +45,18 @@ function populateTemplate(template, data) {
 function use(app, jsonPath, outputDir) {
     app.use((req, res, next) => {
         try {
+            // Generate the files
             generateLLMSFiles(jsonPath, outputDir);
-            next();
+
+            // Read the generated file
+            const outputFilePath = path.join(outputDir, 'llms.txt'); // or 'llms-full.txt' if needed
+            const fileContent = fs.readFileSync(outputFilePath, 'utf-8');
+
+            // Send the file content as a response
+            res.send(fileContent);
+
+            // Exit the middleware chain
+            return;
         } catch (error) {
             next(error); // Pass the error to Express's error handler
         }
