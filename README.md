@@ -1,4 +1,3 @@
-
 # llms-generator
 
 **`llms-generator`** is a Node.js library designed to streamline the creation of `llms.txt` and `llms-full.txt` files. These files enable indexing of API documentation for **automated** and **optimized use** by Large Language Models (LLMs) like ChatGPT, GitHub Copilot, Anthropic's Claude, and others.
@@ -88,7 +87,7 @@ const express = require('express');
 const llmsGenerator = require('llms-generator');
 
 const app = express();
-llmsGenerator.use(app, './path/to/input.json');
+llmsGenerator.use(app, './path/to/input.json', './output/directory');
 
 app.listen(3000, () => {
     console.log('Server is running at http://localhost:3000');
