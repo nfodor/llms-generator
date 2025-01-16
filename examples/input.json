@@ -1,0 +1,31 @@
+{
+    "project_name": "ExampleAPI",
+    "version": "1.0",
+    "description": "An API for text analysis and sentiment scoring.",
+    "base_url": "https://api.example.com",
+    "docs_url": "https://docs.example.com",
+    "endpoints": [
+        "/v1/analyze",
+        "/v1/sentiment"
+    ],
+    "auth": {
+        "method": "API Key",
+        "details": "Pass the API key in the Authorization header."
+    },
+    "rate_limit": "100 requests per minute",
+    "rate_limit_upgrade_url": "https://example.com/upgrade",
+    "sdks": [
+        {
+            "language": "Python",
+            "sdk_url": "https://github.com/example/python-sdk"
+        },
+        {
+            "language": "JavaScript",
+            "sdk_url": "https://github.com/example/js-sdk"
+        }
+    ],
+    "support": {
+        "contact": "support@example.com",
+        "url": "https://support.example.com"
+    }
+}

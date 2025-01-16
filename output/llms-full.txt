@@ -1,0 +1,44 @@
+
+# llms-full.txt - Detailed Documentation for AI Developer Tools
+
+project_name: ExampleAPI
+version: 1.0
+description: An API for text analysis and sentiment scoring.
+
+# Authentication
+auth_methods:
+
+  - method: 
+    details: 
+
+
+# API Endpoints
+endpoints:
+
+  - path: 
+    description: 
+    parameters:
+    
+      - name: 
+        type: 
+        required: 
+        description: 
+    
+    example: 
+
+
+# SDKs
+sdks:
+
+  - language: 
+    sdk_url: 
+    install_command: 
+    example_usage:
+    
+
+
+# Support
+support_contact: support@example.com
+support_hours: 
+support_url: https://support.example.com
+faq_url: 

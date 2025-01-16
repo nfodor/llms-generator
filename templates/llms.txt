@@ -1,0 +1,33 @@
+
+# llms.txt - Optimized Documentation for AI Developer Tools
+
+project_name: {{ project_name }}
+version: {{ version }}
+description: {{ description }}
+base_url: {{ base_url }}
+docs_url: {{ docs_url }}
+
+# API Endpoints
+endpoints:
+{{#each endpoints}}
+  - {{ this }}
+{{/each}}
+
+# Authentication
+auth_method: {{ auth.method }}
+auth_details: {{ auth.details }}
+
+# Rate Limits
+rate_limit: {{ rate_limit }}
+rate_limit_upgrade_url: {{ rate_limit_upgrade_url }}
+
+# SDKs
+sdks:
+{{#each sdks}}
+  - language: {{ this.language }}
+    sdk_url: {{ this.sdk_url }}
+{{/each}}
+
+# Support
+support_contact: {{ support.contact }}
+support_url: {{ support.url }}

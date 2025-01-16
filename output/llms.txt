@@ -1,0 +1,33 @@
+
+# llms.txt - Optimized Documentation for AI Developer Tools
+
+project_name: ExampleAPI
+version: 1.0
+description: An API for text analysis and sentiment scoring.
+base_url: https://api.example.com
+docs_url: https://docs.example.com
+
+# API Endpoints
+endpoints:
+
+  - 
+
+
+# Authentication
+auth_method: API Key
+auth_details: Pass the API key in the Authorization header.
+
+# Rate Limits
+rate_limit: 100 requests per minute
+rate_limit_upgrade_url: https://example.com/upgrade
+
+# SDKs
+sdks:
+
+  - language: 
+    sdk_url: 
+
+
+# Support
+support_contact: support@example.com
+support_url: https://support.example.com

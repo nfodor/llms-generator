@@ -1,0 +1,44 @@
+
+# llms-full.txt - Detailed Documentation for AI Developer Tools
+
+project_name: {{ project_name }}
+version: {{ version }}
+description: {{ description }}
+
+# Authentication
+auth_methods:
+{{#each auth.methods}}
+  - method: {{ this.method }}
+    details: {{ this.details }}
+{{/each}}
+
+# API Endpoints
+endpoints:
+{{#each endpoints}}
+  - path: {{ this.path }}
+    description: {{ this.description }}
+    parameters:
+    {{#each this.parameters}}
+      - name: {{ this.name }}
+        type: {{ this.type }}
+        required: {{ this.required }}
+        description: {{ this.description }}
+    {{/each}}
+    example: {{ this.example }}
+{{/each}}
+
+# SDKs
+sdks:
+{{#each sdks}}
+  - language: {{ this.language }}
+    sdk_url: {{ this.sdk_url }}
+    install_command: {{ this.install_command }}
+    example_usage:
+    {{ this.example_usage }}
+{{/each}}
+
+# Support
+support_contact: {{ support.contact }}
+support_hours: {{ support.hours }}
+support_url: {{ support.url }}
+faq_url: {{ support.faq_url }}
