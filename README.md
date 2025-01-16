@@ -133,4 +133,4 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 ## Contact
 
 For support or inquiries, please contact:
-- **Email**: support@example.com
+- **Email**: npm@fodor.net
