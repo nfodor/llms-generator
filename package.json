@@ -4,7 +4,8 @@
     "description": "Generate llms.txt and llms-full.txt files from a JSON file.",
     "main": "src/index.js",
     "scripts": {
-        "test": "node tests/test.js"
+        "start": "node src/index.js",
+        "test": "mocha"
     },
     "keywords": [
         "llms",
@@ -13,5 +14,10 @@
         "generator"
     ],
     "author": "Your Name",
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "chai": "^4.5.0",
+        "mocha": "^10.8.2",
+        "supertest": "^6.1.6"
+    }
 }

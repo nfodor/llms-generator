@@ -1,10 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 
-function generateLLMSFiles(jsonPath, outputDir) {
+function generateLLMSFiles(jsonInput, outputDir) {
     try {
-        // Read and parse the JSON file
-        const jsonData = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+        let jsonData;
+
+        // Determine if jsonInput is a file path or a JSON object
+        if (typeof jsonInput === 'string') {
+            // Read and parse the JSON file
+            jsonData = JSON.parse(fs.readFileSync(jsonInput, 'utf-8'));
+        } else if (typeof jsonInput === 'object') {
+            // Use the JSON object directly
+            jsonData = jsonInput;
+        } else {
+            throw new Error('Invalid JSON input. Must be a file path or a JSON object.');
+        }
 
         // Construct paths to the template files
         const llmsTemplatePath = path.join(__dirname, '../templates/llms.txt');
@@ -34,19 +44,12 @@ function generateLLMSFiles(jsonPath, outputDir) {
     }
 }
 
-function populateTemplate(template, data) {
-    return template.replace(/\{\{(.*?)\}\}/g, (_, key) => {
-        const keys = key.trim().split('.');
-        return keys.reduce((obj, k) => obj && obj[k], data) || '';
-    });
-}
-
 // Add a .use() method to make it compatible with middleware-style usage
-function use(app, jsonPath, outputDir) {
+function use(app, jsonInput, outputDir) {
     app.use((req, res, next) => {
         try {
             // Generate the files
-            generateLLMSFiles(jsonPath, outputDir);
+            generateLLMSFiles(jsonInput, outputDir);
 
             // Read the generated file
             const outputFilePath = path.join(outputDir, 'llms.txt'); // or 'llms-full.txt' if needed
@@ -63,15 +66,22 @@ function use(app, jsonPath, outputDir) {
     });
 }
 
+function populateTemplate(template, data) {
+    return template.replace(/\{\{(.*?)\}\}/g, (_, key) => {
+        const keys = key.trim().split('.');
+        return keys.reduce((obj, k) => obj && obj[k], data) || '';
+    });
+}
+
 // Export both the main function and the .use() method
 module.exports = generateLLMSFiles;
 module.exports.use = use;
 
 if (require.main === module) {
-    const [,, jsonPath, outputDir] = process.argv;
-    if (!jsonPath || !outputDir) {
-        console.error('Usage: llms-generator <path-to-json> <output-dir>');
+    const [,, jsonInput, outputDir] = process.argv;
+    if (!jsonInput || !outputDir) {
+        console.error('Usage: llms-generator <json-input> <output-dir>');
         process.exit(1);
     }
-    generateLLMSFiles(jsonPath, outputDir);
+    generateLLMSFiles(jsonInput, outputDir);
 }
