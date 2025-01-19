@@ -1,6 +1,6 @@
 {
     "name": "llms-generator",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Generate llms.txt and llms-full.txt files from a JSON file.",
     "main": "src/index.js",
     "scripts": {
