@@ -24,20 +24,48 @@ describe('use function', () => {
         fs.rmSync(outputDir, { recursive: true, force: true });
     });
 
-    it('should integrate with Express and return generated file content', (done) => {
+    it('should pass to next middleware for non-llms paths', (done) => {
         const app = express();
-
-        // Use the middleware
         use(app, jsonInput, outputDir);
 
-        // Simulate a request to the root path
+        // Add a catch-all route to simulate next middleware
+        app.use((req, res) => {
+            res.status(404).send('Not Found');
+        });
+
         request(app)
             .get('/')
+            .expect(404)
+            .end((err, res) => {
+                if (err) return done(err);
+                expect(res.text).to.equal('Not Found');
+                done();
+            });
+    });
+
+    it('should return llms.txt content', (done) => {
+        const app = express();
+        use(app, jsonInput, outputDir);
+
+        request(app)
+            .get('/llms.txt')
             .expect(200)
             .end((err, res) => {
                 if (err) return done(err);
+                expect(res.text).to.include('project_name');
+                done();
+            });
+    });
 
-                // Check if the response contains expected content
+    it('should return llms-full.txt content', (done) => {
+        const app = express();
+        use(app, jsonInput, outputDir);
+
+        request(app)
+            .get('/llms-full.txt')
+            .expect(200)
+            .end((err, res) => {
+                if (err) return done(err);
                 expect(res.text).to.include('project_name');
                 done();
             });

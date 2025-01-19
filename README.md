@@ -74,20 +74,53 @@ npm install llms-generator
 ### Programmatic Usage
 Generate `llms.txt` and `llms-full.txt` files programmatically:
 ```javascript
-const llmsGenerator = require('llms-generator');
+const { generateLLMSFiles } = require('llms-generator');
 
 // Generate files from a JSON configuration
-llmsGenerator.generateLLMSFiles('./path/to/input.json', './output/directory');
+generateLLMSFiles('./path/to/input.json', './output/directory');
 ```
 
 ### Express Integration
 Serve `llms.txt` and `llms-full.txt` dynamically in an Express app:
 ```javascript
 const express = require('express');
-const llmsGenerator = require('llms-generator');
+const { use } = require('llms-generator');
 
 const app = express();
-llmsGenerator.use(app, './path/to/input.json', './output/directory');
+const jsonInput = {
+    "project_name": "ExampleAPI",
+    "version": "1.0",
+    "description": "An API for text analysis and sentiment scoring.",
+    "base_url": "https://api.example.com",
+    "docs_url": "https://docs.example.com",
+    "endpoints": [
+        "/v1/analyze",
+        "/v1/sentiment"
+    ],
+    "auth": {
+        "method": "API Key",
+        "details": "Pass the API key in the Authorization header."
+    },
+    "rate_limit": "100 requests per minute",
+    "rate_limit_upgrade_url": "https://example.com/upgrade",
+    "sdks": [
+        {
+            "language": "Python",
+            "sdk_url": "https://github.com/example/python-sdk"
+        },
+        {
+            "language": "JavaScript",
+            "sdk_url": "https://github.com/example/js-sdk"
+        }
+    ],
+    "support": {
+        "contact": "support@example.com",
+        "url": "https://support.example.com"
+    }
+};
+const outputDir = './output/directory';
+
+use(app, jsonInput, outputDir);
 
 app.listen(3000, () => {
     console.log('Server is running at http://localhost:3000');

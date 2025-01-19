@@ -48,18 +48,23 @@ function generateLLMSFiles(jsonInput, outputDir) {
 function use(app, jsonInput, outputDir) {
     app.use((req, res, next) => {
         try {
-            // Generate the files
-            generateLLMSFiles(jsonInput, outputDir);
+            // Check if the request is for llms.txt or llms-full.txt
+            if (req.path === '/llms.txt' || req.path === '/llms-full.txt') {
+                // Generate the files
+                generateLLMSFiles(jsonInput, outputDir);
 
-            // Read the generated file
-            const outputFilePath = path.join(outputDir, 'llms.txt'); // or 'llms-full.txt' if needed
-            const fileContent = fs.readFileSync(outputFilePath, 'utf-8');
+                // Determine which file to serve based on the request URL
+                const outputFilePath = path.join(outputDir, req.path.substring(1));
 
-            // Send the file content as a response
-            res.send(fileContent);
+                // Read the generated file
+                const fileContent = fs.readFileSync(outputFilePath, 'utf-8');
 
-            // Exit the middleware chain
-            return;
+                // Send the file content as a response
+                res.send(fileContent);
+            } else {
+                // Pass to the next middleware if the path is not recognized
+                next();
+            }
         } catch (error) {
             next(error); // Pass the error to Express's error handler
         }
